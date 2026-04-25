@@ -1,0 +1,16 @@
+{
+  "api_key": "",
+  "base_url": "https://ark.cn-beijing.volces.com/api/coding/v3",
+  "model": "minimax-m2.7",
+  "system_prompt": null,
+  "max_tool_calls": 100,
+  "command": {
+    "default_timeout_secs": 30,
+    "max_timeout_secs": 300
+  },
+  "working_dir": ".",
+  "thinking": {
+    "enabled": false,
+    "budget_tokens": 8000
+  }
+}
