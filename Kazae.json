@@ -1,7 +1,7 @@
 {
   "api_key": "",
-  "base_url": "https://ark.cn-beijing.volces.com/api/coding/v3",
-  "model": "minimax-m2.7",
+  "base_url": "https://api.deepseek.com/v1",
+  "model": "deepseek-chat",
   "system_prompt": null,
   "max_tool_calls": 100,
   "command": {
