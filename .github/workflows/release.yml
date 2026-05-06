@@ -6,6 +6,9 @@ on:
       - "v*"
   workflow_dispatch:
     inputs:
+      tag_name:
+        description: "Git tag (e.g. v0.1.0)"
+        required: true
       release_type:
         description: "Release type"
         required: true
@@ -102,19 +105,22 @@ jobs:
             fi
           done
 
-      - name: Determine release mode
+      - name: Determine release mode and tag
         id: mode
         shell: bash
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "prerelease=${{ github.event.inputs.release_type == 'prerelease' && 'true' || 'false' }}" >> $GITHUB_OUTPUT
+            echo "tag_name=${{ github.event.inputs.tag_name }}" >> $GITHUB_OUTPUT
           else
             echo "prerelease=true" >> $GITHUB_OUTPUT
+            echo "tag_name=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
           fi
 
       - name: Upload release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.mode.outputs.tag_name }}
           files: release_files/*
           prerelease: ${{ steps.mode.outputs.prerelease }}
           generate_release_notes: true
